@@ -1,0 +1,41 @@
+--Line Plot
+--print() the last item from both the year and the pop list to see what the predicted population for the year 2100 is.
+Before you can start, you should import matplotlib.pyplot as plt. pyplot is a sub-package of matplotlib, hence the dot.
+Use plt.plot() to build a line plot. year should be mapped on the horizontal axis, pop on the vertical axis. Don't forget to finish off with the show() function to actually display the plot.
+
+# Print the last item from year and pop
+print (year[-1])
+print (pop[-1])
+
+# Import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+
+# Make a line plot: year on the x-axis, pop on the y-axis
+plt.plot(year,pop)
+plt.show()
+
+4.--Scatter Plot
+Change the line plot that's coded in the script to a scatter plot.
+A correlation will become clear when you display the GDP per capita on a logarithmic scale. Add the line plt.xscale('log').
+Finish off you# Change the line plot below to a scatter plot
+plt.scatter(gdp_cap, life_exp)
+
+# Put the x-axis on a logarithmic scale
+plt.xscale('log')
+
+# Show plot
+plt.show()r script with plt.show() to display the plot.
+
+ 5.--Scatter Plot (2)
+ --Start from scratch: import matplotlib.pyplot as plt.
+Build a scatter plot, where pop is mapped on the horizontal axis, and life_exp is mapped on the vertical axis.
+Finish the script with plt.show() to actually display the plot. Do you see a correlation?
+
+# Import package
+import matplotlib.pyplot as plt
+
+# Build Scatter plot
+plt.scatter(pop,life_exp)
+
+# Show plot
+plt.show()
