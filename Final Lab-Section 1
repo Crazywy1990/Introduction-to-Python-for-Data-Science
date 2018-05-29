@@ -1,0 +1,86 @@
+1.--Import pandas as pd.
+Read in the data from recent_grads_url (which is a CSV file) and assign it to a variable called recent_grads.
+Print the shape of recent_grads.
+
+# Import pandas 
+import pandas as pd
+
+# Use pandas to read in recent_grads_url
+recent_grads = pd.read_csv(recent_grads_url)
+
+# Print the shape
+print(recent_grads.shape)
+
+2.--Print the .dtypes of your data so that you know what each column contains.
+Output summary statistics using a single pandas function.
+With the same function from before, summary statistics for all columns that aren't of type object.
+
+# Print .dtypes
+print(recent_grads.dtypes)
+
+# Output summary statistics
+print(recent_grads.describe())
+
+# Exclude data of type object
+print(recent_grads.describe(exclude=["object"]))
+
+3.--Look at the dtypes of the columns in columns to make sure that the data is numeric.
+It looks like a string is being used to encode missing values. Use the .unique() method to figure out what the string is.
+Search for missing values in the median, p25th, and p75th columns.
+Replace the found missing values with a NaN value, using numpy's np.nan.
+
+# Names of the columns we're searching for missing values 
+columns = ['median', 'p25th', 'p75th']
+
+# Take a look at the dtypes
+print(recent_grads[columns].dtypes)
+
+# Find how missing values are represented
+print(recent_grads["median"].unique())
+print(recent_grads["p25th"].unique())
+print(recent_grads["p75th"].unique())
+
+# Replace missing values with NaN
+for column in columns:
+    recent_grads.loc[recent_grads[column]== 'UN', column] = np.nan
+    
+4.--Select the sharewomen column from recent_grads and assign this to a variable named sw_col.
+Output the first 5 rows of sw_col.
+
+# Select sharewomen column
+sw_col = recent_grads["sharewomen"]
+
+# Output first five rows
+print(sw_col.loc[:4])
+
+5.--Import numpy as np.
+Using a numpy built-in function, find the maximum value of the sharewomen column and assign this value to the variable max_sw.
+Print the value of max_sw
+
+# Import numpy
+import numpy as np
+
+# Use max to output maximum values
+max_sw = max (sw_col)
+
+# Print column max
+print(max_sw)
+
+6.--Output the row of data for the department that has the largest percentage of women.
+# Output the row containing the maximum percentage of women
+print(recent_grads[sw_col == max_sw])
+
+7.--Select the columns unemployed and low_wage_jobs from recent_grads, then convert them to a numpy array. Save this as recent_grads_np.
+Print the type of recent_grads_np to see that it is a numpy array.
+
+# Convert to numpy array
+recent_grads_np = recent_grads[['unemployed','low_wage_jobs']].values
+
+
+# Print the type of recent_grads_np
+print((recent_grads_np))
+
+8.--Calculate the correlation matrix of the numpy array recent_grads_np.
+# Calculate correlation matrix
+print(np.corrcoef(recent_grads_np[:,0], recent_grads_np[:,1]))
+    
