@@ -1,1 +1,73 @@
 
+1--Creating Columns I
+--Create a new column named sharemen, that contains the percentage of men for a given department by dividing the number of men by the total number of students for each department.
+# Add sharemen column
+recent_grads['sharemen'] = recent_grads['men']/recent_grads['total']
+
+2.--Select Row with Highest Value
+--Using numpy, find the maximum value for the percentage of men and call this variable max_men.
+Select the row that has the percentage of men which corresponds to max_men.
+
+# Find the maximum percentage value of men
+max_men = np.max(recent_grads['sharemen'])
+ 
+# Output the row with the highest percentage of men
+print(recent_grads.loc[recent_grads['sharemen']==max_men])
+
+3.--Creating columns II
+--Add a column named gender_diff that reports how much higher the rate of women is than the rate of men.
+
+# Add gender_diff column
+recent_grads['gender_diff'] = recent_grads['sharewomen']-recent_grads['sharemen']
+
+4.--Updating columns
+--Use numpy and pandas to convert each value in the gender_diff column to its absolute value.
+Output the five departments with the most balanced gender ratios.
+
+# Make all gender difference values positive
+recent_grads['gender_diff'] = np.absolute(recent_grads['gender_diff'])
+
+# Find the 5 rows with lowest gender rate difference
+print(recent_grads.nsmallest(5,'gender_diff'))
+
+5.--Filtering rows
+--Create diff_30, a boolean Series that is True when the corresponding value of gender_diff is greater than 0.30 and False otherwise.
+Make another boolean Series called more_men that's true when the corresponding row in recent_grads has more men than women.
+Combine your two Series to make one that you can use to select rows that have both more men than women and a value of gender_diff greater than 0.30. Save the result as more_men_and_diff_30.
+Use this new boolean Series to create the DataFrame fewer_women that contains only the rows you're interested in.
+
+# Rows where gender rate difference is greater than .30 
+diff_30 = recent_grads['gender_diff'] > .30
+
+# Rows with more men
+more_men = recent_grads['sharemen'] > recent_grads['sharewomen']
+
+# Combine more_men and diff_30
+more_men_and_diff_30 = np.logical_and(diff_30,more_men)
+
+# Find rows with more men and and gender rate difference greater than .30
+fewer_women = recent_grads[more_men_and_diff_30]
+
+6.--Grouping with Counts
+--Using the .groupby() method, group the recent_grads DataFrame by 'major_category' and then count the number of departments per category using .count().
+# Group by major category and count
+print(recent_grads.groupby(['major_category'])['major_category'].count())
+
+7.--Grouping with Counts, Part 2
+--Create a DataFrame that groups the departments by major category and shows the number of departments that are skewed in women.
+# Group departments that have less women by category and count
+print(fewer_women.groupby(['major_category']).major_cate
+
+8.--Grouping One Column with Means
+--Write code that outputs the average gender percentage difference by major category.
+
+# Report average gender difference by major category
+
+print(recent_grads.groupby(['major_category']).gender_diff.mean())
+
+9.--Grouping Two Columns with Means
+--Write a query that outputs the mean number of 'low_wage_jobs' and average 'unemployment_rate' grouped by 'major_category'.
+
+# Find average number of low wage jobs and unemployment rate of each major category
+dept_stats =recent_grads.groupby(['major_category'])['low_wage_jobs', 'unemployment_rate'].mean()
+print(dept_stats)
