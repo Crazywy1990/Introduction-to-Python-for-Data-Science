@@ -1,0 +1,139 @@
+--Plotting Scatterplots
+--Import matplotlib.pyplot with the alias plt.
+Create a scatter plot between unemployment_rate and low_wage_jobs per major category.
+Label the x axis with 'Unemployment rate'.
+Label the y axis with 'Low pay jobs'.
+
+# Import matplotlib
+import matplotlib.pyplot as plt
+
+# Create scatter plot
+plt.scatter(unemployment_rate,low_wage_jobs)
+
+# Label x axis
+plt.xlabel('Unemployment rate')
+
+# Label y axis
+plt.ylabel('Low pay jobs')
+
+--Create the scatterplot visualization between the unemployment rate and number of low wage jobs per major category using the .plot() method.
+Customize this scatterplot so that the points are red triangles by setting the color argument to "r" and the marker argument ^.
+Display the plot you've created!
+
+# Display the graph 
+plt.show()
+
+2.--Modifying Plot Colors
+--Create the scatterplot visualization between the unemployment rate and number of low wage jobs per major category using the .plot() method.
+Customize this scatterplot so that the points are red triangles by setting the color argument to "r" and the marker argument ^.
+Display the plot you've created!
+
+# Plot the red and triangle shaped scatter plot  
+plt.scatter(unemployment_rate,low_wage_jobs, color = 'r',marker='^')
+
+# Display the visualization
+plt.show()Use matplotlib to create a histogram of sharewomen.
+
+
+3.--Plotting Histograms
+--Show the plot you created.
+
+# Plot a histogram of sharewomen
+plt.hist(sharewomen)
+
+# Show the plot
+plt.show()
+
+
+4.--Plotting with pandas
+--Use the .plot() method with kind='scatter' on the dept_stats DataFrame to create a scatter plot with 'unemployment_rate' on the x-axis and 'low_wage_jobs' on the y-axis.
+
+Now, create a histogram of the sharewomen column of the recent_grads DataFrame.
+
+# Import matplotlib and pandas
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Create scatter plot
+dept_stats.plot(kind='scatter', x='unemployment_rate', y='low_wage_jobs')
+plt.show()
+
+5.--Plotting One Bar Graphs
+--Plotting One Bar Graphs
+
+# DataFrame of non-college job sums
+df = recent_grads.groupby(['major_category']).non_college_jobs.sum()
+
+# Plot bar chart
+df.plot(kind="bar")
+
+# Show graph
+plt.show()
+
+
+6.--Plotting Two Bar Graphs
+--Use pandas to create a DataFrame that reports the number of graduates working at jobs that do require college degrees ('college_jobs'), and do not require college degrees ('non_college_jobs'). Assign this to a variable named df1.
+Create a plot that reports this data with matplotlib.
+Display the plot you've created!
+# DataFrame of college and non-college job sums
+df1 = recent_grads.groupby(['major_category'])['college_jobs','non_college_jobs'].sum()
+The columns median, p25th, and p75th are currently encoded as strings. Convert these columns to numerical values. Then, divide the value of each column by 1000 to make the scale of the final plot easier to read.\
+
+# Plot bar chart
+df1.plot(kind="bar")
+
+# Show graph
+plt.show()
+
+7.--Dropping Missing Values
+--With a single line of code, drop all the rows that have a missing value.
+Print the size of the manipulated DataFrame.
+
+# Print the size of the DataFrame
+print(recent_grads.size)
+
+# Drop all rows with a missing value
+recent_grads.dropna(axis=0,inplace=True)
+
+# Print the size of the DataFrame
+print(recent_grads.size)
+
+8.--Plotting Quantiles of Salary, Part 1
+--The columns median, p25th, and p75th are currently encoded as strings. Convert these columns to numerical values. Then, divide the value of each column by 1000 to make the scale of the final plot easier to read.
+Find the of each of the three columns for each major category. Save this as sal_quantiles
+
+# Convert to numeric and divide by 1000
+recent_grads['median'] =pd.to_numeric(recent_grads['median'] )/1000
+
+recent_grads['p25th'] = pd.to_numeric(recent_grads['p25th'] )/1000
+recent_grads['p75th'] = pd.to_numeric(recent_grads['p75th'] )/1000
+
+# Select averages by major category
+columns = ['median', 'p25th', 'p75th']
+sal_quantiles = recent_grads.groupby(['major_category'])[columns].mean()
+
+9.--Plotting Quantiles of Salary, Part 2
+--Plot the DataFrame.
+Clean up the x-axis labels with the function plt.xticks(). Set the first argument equal to np.arange(len(sal_quantiles.index)), the second argument equal to sal_quantiles.index, and the keyword argument rotation = 'vertical'.
+Show the plot.
+Now call the .plot() method with the argument subplots=True to plot the columns on separate axes. Show this plot as well.
+
+# Plot the data
+sal_quantiles.plot()
+
+# Set xticks
+plt.xticks(
+    np.arange(len(sal_quantiles.index)),
+    sal_quantiles.index, 
+    rotation='vertical')
+
+# Show the plot
+plt.show()
+
+# Plot with subplots
+sal_quantiles.plot(subplots=True)
+plt.show()
+
+
+
+
